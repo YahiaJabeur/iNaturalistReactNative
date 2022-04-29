@@ -26,6 +26,7 @@ import DatePicker from "./DatePicker";
 import TranslatedText from "../SharedComponents/TranslatedText";
 import Notes from "./Notes";
 import BottomModal from "./BottomModal";
+import AddMediaSheet from "./AddMediaSheet";
 
 const ObsEdit = ( ): Node => {
   const {
@@ -42,11 +43,14 @@ const ObsEdit = ( ): Node => {
   const [showBottomModal, setBottomModal] = useState( false );
   const [source, setSource] = useState( null );
   const isLoggedIn = useLoggedIn( );
+  const [showAddMediaSheet, setShowAddMediaSheet] = useState( false );
 
   const openModal = useCallback( ( ) => setModal( true ), [] );
   const closeModal = useCallback( ( ) => setModal( false ), [] );
   const openBottomModal = useCallback( ( ) => setBottomModal( true ), [] );
   const closeBottomModal = useCallback( ( ) => setBottomModal( false ), [] );
+  const openAddMediaSheet = useCallback( ( ) => setShowAddMediaSheet( true ), [] );
+  const closeAddMediaSheet = useCallback( ( ) => setShowAddMediaSheet( false ), [] );
 
   const [showLocationPicker, setShowLocationPicker] = useState( false );
 
@@ -394,7 +398,7 @@ const ObsEdit = ( ): Node => {
       {renderArrowNavigation( )}
       <TranslatedText style={textStyles.headerText} text="Evidence" />
       {/* TODO: allow user to tap into bigger version of photo (crop screen) */}
-      <EvidenceList currentObs={currentObs} showCameraOptions />
+      <EvidenceList currentObs={currentObs} openAddMediaSheet={openAddMediaSheet} />
       <Pressable
         onPress={openLocationPicker}
       >
@@ -455,6 +459,7 @@ const ObsEdit = ( ): Node => {
           disabled={!isLoggedIn}
         />
       </View>
+      {showAddMediaSheet && <AddMediaSheet />}
     </ScrollNoFooter>
   );
 };

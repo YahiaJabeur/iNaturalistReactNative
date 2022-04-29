@@ -1,21 +1,29 @@
 // @flow
 
 import React from "react";
-import { FlatList, Image, View, Pressable } from "react-native";
+import { FlatList, Image, View, Pressable, Text } from "react-native";
 import type { Node } from "react";
 
-import { imageStyles, viewStyles } from "../../styles/obsEdit/obsEdit";
-import CameraOptionsButton from "../SharedComponents/Buttons/CameraOptionsButton";
+import { imageStyles, viewStyles, textStyles } from "../../styles/obsEdit/obsEdit";
+// import CameraOptionsButton from "../SharedComponents/Buttons/CameraOptionsButton";
+// import AddMediaSheet from "./AddMediaSheet";
 
 type Props = {
   currentObs: Object,
-  showCameraOptions?: boolean,
+  openAddMediaSheet?: Function,
   setSelectedPhoto?: Function,
   selectedPhoto?: number
 }
 
-const EvidenceList = ( { currentObs, showCameraOptions, setSelectedPhoto, selectedPhoto }: Props ): Node => {
-  const renderCameraOptionsButton =  ( ) => showCameraOptions ? <CameraOptionsButton /> : <View />;
+const EvidenceList = ( { currentObs, openAddMediaSheet, setSelectedPhoto, selectedPhoto }: Props ): Node => {
+  const renderCameraOptionsButton =  ( ) => openAddMediaSheet ? (
+    <Pressable
+      onPress={openAddMediaSheet}
+      style={viewStyles.evidenceButton}
+    >
+      <Text style={textStyles.center}>tap to show media</Text>
+    </Pressable>
+  ) : <View />;
 
   const renderEvidence = ( { item, index } ) => {
     const isSound = item.uri.includes( "m4a" );
