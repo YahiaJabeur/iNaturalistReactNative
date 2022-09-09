@@ -11,7 +11,9 @@
     "lint:eslint": "eslint . --fix",
     "lint:flow": "flow check",
     "postinstall": "husky install",
-    "translate": "node src/i18n/i18ncli.js build"
+    "translate": "node src/i18n/i18ncli.js build",
+    "storybook": "start-storybook -p 7007",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.18.2",
@@ -83,9 +85,17 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
+    "@storybook/addon-actions": "^5.3.21",
+    "@storybook/addon-knobs": "^5.3.21",
+    "@storybook/addon-links": "^5.3.21",
+    "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@storybook/addon-ondevice-knobs": "^5.3.26",
+    "@storybook/react-native": "^5.3.25",
+    "@storybook/react-native-server": "^5.3.23",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/react-native": "^9.0.0",
     "babel-jest": "^26.6.3",
+    "babel-loader": "^8.2.5",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-eslint-comments": "^3.2.0",
