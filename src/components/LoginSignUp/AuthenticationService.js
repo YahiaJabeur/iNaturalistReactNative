@@ -108,7 +108,7 @@ const getAnonymousJWT = () => {
  *  logged-in, use anonymous JWT
  * @returns {Promise<string|*>}
  */
-const getJWTToken = async ( allowAnonymousJWT: boolean = false ): Promise<?string> => {
+const getJWT = async ( allowAnonymousJWT: boolean = false ): Promise<?string> => {
   let jwtToken = await RNSInfo.getItem( "jwtToken", {} );
   let jwtGeneratedAt = await RNSInfo.getItem( "jwtGeneratedAt", {} );
   if ( jwtGeneratedAt ) {
@@ -190,7 +190,7 @@ const getAPIToken = async (
   }
 
   if ( useJWT ) {
-    return getJWTToken( allowAnonymousJWT );
+    return getJWT( allowAnonymousJWT );
   }
   const accessToken = await RNSInfo.getItem( "accessToken", {} );
   return `Bearer ${accessToken}`;
@@ -405,7 +405,7 @@ export {
   API_HOST,
   authenticateUser,
   getAPIToken,
-  getJWTToken,
+  getJWT,
   getUser,
   getUserId,
   getUsername,
