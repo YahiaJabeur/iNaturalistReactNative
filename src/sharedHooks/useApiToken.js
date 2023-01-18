@@ -6,10 +6,9 @@ import useCurrentUser from "sharedHooks/useCurrentUser";
 
 const useApiToken = ( ): string | null => {
   const [apiToken, setApiToken] = useState( null );
+  const [shouldFetchToken, setShouldFetchToken] = useState( true );
   const currentUser = useCurrentUser( );
 
-  // Without the dependency array, this hook will run on every render, then every time
-  // a new token is fetched, and if expired fetched from API (in getJWT).
   useEffect( ( ) => {
     const fetchApiToken = async ( ) => {
       if ( !currentUser ) {
@@ -21,12 +20,13 @@ const useApiToken = ( ): string | null => {
         if ( token !== apiToken ) {
           setApiToken( token );
         }
+        setShouldFetchToken( false );
       } else {
         console.error( "Failed to get API token even though user is logged in: ", currentUser );
       }
     };
-    fetchApiToken( );
-  } );
+    if ( shouldFetchToken ) fetchApiToken( );
+  }, [shouldFetchToken, currentUser, apiToken] );
 
   return apiToken;
 };
