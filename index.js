@@ -43,7 +43,7 @@ const queryClient = new QueryClient( {
           || ( error instanceof TypeError && error.message.match( "Network request failed" ) )
         ) return failureCount < 3;
         if ( error.status === 401 || error.status === 403 ) {
-          // If we get a 401 or 403, we might need to refresh the JWT and retry the request once
+          // If we get a 401 or 403, we might need to refresh the JWT and retry the request
           return failureCount < 3;
         }
         handleError( error, { throw: false } );
