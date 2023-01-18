@@ -9,7 +9,6 @@ import {
 } from "@tanstack/react-query";
 import handleError from "api/error";
 import App from "components/App";
-import { getJWT } from "components/LoginSignUp/AuthenticationService";
 import inatjs from "inaturalistjs";
 import ObsEditProvider from "providers/ObsEditProvider";
 import RealmProvider from "providers/RealmProvider";
@@ -45,8 +44,7 @@ const queryClient = new QueryClient( {
         ) return failureCount < 3;
         if ( error.status === 401 || error.status === 403 ) {
           // If we get a 401 or 403, we might need to refresh the JWT and retry the request once
-          await getJWT();
-          return 1;
+          return failureCount < 3;
         }
         handleError( error, { throw: false } );
         return false;
