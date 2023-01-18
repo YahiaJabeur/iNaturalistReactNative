@@ -117,11 +117,13 @@ const getJWT = async ( allowAnonymousJWT: boolean = false ): Promise<?string> =>
 
   const loggedIn = await isLoggedIn();
 
+  // If user is not logged in, we can allow some API requests with an anonymous JWT
   if ( !loggedIn && allowAnonymousJWT ) {
     // User not logged in, and anonymous JWT is allowed - return it
     return getAnonymousJWT();
   }
 
+  // User is not logged in and anonymous JWT is not allowed - return null
   if ( !loggedIn ) {
     return null;
   }
