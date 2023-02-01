@@ -60,6 +60,7 @@ const Toolbar = ( { setLayout, layout }: Props ): Node => {
   };
 
   const getStatusText = ( ) => {
+    // TODO: add shorter text for smaller breakpoints, as referenced in issue #405
     if ( !uploadInProgress && numUnuploadedObs > 0 ) {
       return t( "Upload-x-observations", { count: numUnuploadedObs } );
     }
@@ -85,7 +86,7 @@ const Toolbar = ( { setLayout, layout }: Props ): Node => {
           <Pressable
             className="mr-3"
             accessibilityRole="button"
-            onPress={( ) => navigation.navigate( "MainStack", { screen: "ExploreLanding" } )}
+            onPress={( ) => navigation.navigate( "MainStack", { screen: "Explore" } )}
           >
             <IconMaterial name="language" size={30} />
           </Pressable>
